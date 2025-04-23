@@ -69,10 +69,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get("MYSQL_DATABASE", 'django_demo'),
-        'USER': os.environ.get("MYSQL_USERNAME"),
-        'HOST': os.environ.get("MYSQL_ADDRESS").split(':')[0],
-        'PORT': os.environ.get("MYSQL_ADDRESS").split(':')[1],
-        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
+        'USER': os.environ.get("MYSQL_USER","root"),
+        'HOST': os.environ.get("MYSQL_HOST","sh-cynosdbmysql-grp-jmgtmnw8.sql.tencentcdb.com"),
+        'PORT': os.environ.get("MYSQL_PORT","20618"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD","mEnzn9aV"),
         'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
@@ -159,6 +159,24 @@ LOGGING = {
         },
         # log 调用时需要当作参数传入
         'log': {
+            'handlers': ['error', 'info', 'console', 'default'],
+            'level': 'INFO',
+            'propagate': True
+        },
+        # 身份验证模块日志
+        'auth': {
+            'handlers': ['error', 'info', 'console', 'default'],
+            'level': 'INFO',
+            'propagate': True
+        },
+        # 行程分享模块日志
+        'share': {
+            'handlers': ['error', 'info', 'console', 'default'],
+            'level': 'INFO',
+            'propagate': True
+        },
+        # 评论模块日志
+        'comments': {
             'handlers': ['error', 'info', 'console', 'default'],
             'level': 'INFO',
             'propagate': True

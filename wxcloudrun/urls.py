@@ -15,12 +15,21 @@ Including another URLconf
 """
 
 from wxcloudrun import views
-from django.conf.urls import url
+from django.urls import path, re_path,include
 
 urlpatterns = (
     # 计数器接口
-    url(r'^^api/count(/)?$', views.counter),
+    re_path(r'^^api/count(/)?$', views.counter),
 
     # 获取主页
-    url(r'(/)?$', views.index),
+    re_path(r'(/)?$', views.index),
+    
+    # 认证相关接口
+    path('api/auth/', include('wxcloudrun.auth.urls')),
+    
+    # 行程分享相关接口
+    path('api/trips/', include('wxcloudrun.share.urls')),
+    
+    # 管理员相关接口
+    path('api/admin/trips/', include('wxcloudrun.share.admin_urls')),
 )
